@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+# remove the old kernel
+package-cleanup --oldkernels --all --count=1 -y
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
 # clean all
 yum update -y
 yum clean all
@@ -27,5 +32,4 @@ rm -rf /run/log/journal/*
 dd if=/dev/zero of=/EMPTY bs=1M
 rm -f /EMPTY
 sync
-grub2-set-default 1
-echo "###   Hi from secone stage" >> /boot/grub2/grub.cfg
+echo "###   Hi from second stage" >> /boot/grub2/grub.cfg
